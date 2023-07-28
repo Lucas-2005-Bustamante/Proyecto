@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Adivinanza</title>
+</head>
+<body>
+    <h1>Juego de Adivinanza</h1>
+    <p>Intenta adivinar el número entre 1 y 100:</p>
+    <input type="number" id="numeroAdivinar">
+    <button onclick="verificarNumero()">Adivinar</button>
+    <p id="mensajeResultado"></p>
+
+    <script>
+        // Generar un número aleatorio entre 1 y 100 para adivinar
+        const numeroCorrecto = Math.floor(Math.random() * 100) + 1;
+        let intentos = 0;
+
+        function verificarNumero() {
+            const numeroAdivinar = parseInt(document.getElementById('numeroAdivinar').value);
+
+            if (isNaN(numeroAdivinar) || numeroAdivinar < 1 || numeroAdivinar > 100) {
+                document.getElementById('mensajeResultado').innerText = 'Por favor, ingresa un número válido entre 1 y 100.';
+            } else {
+                intentos++;
+
+                if (numeroAdivinar === numeroCorrecto) {
+                    document.getElementById('mensajeResultado').innerText = `¡Felicidades! Adivinaste el número ${numeroCorrecto} en ${intentos} intentos.`;
+                    document.getElementById('numeroAdivinar').disabled = true;
+                } else if (numeroAdivinar < numeroCorrecto) {
+                    document.getElementById('mensajeResultado').innerText = 'El número a adivinar es mayor.';
+                } else {
+                    document.getElementById('mensajeResultado').innerText = 'El número a adivinar es menor.';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
